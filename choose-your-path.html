@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#11151d" />
+    <meta name="description" content="Choose where your university story begins: a world of magic or a more familiar path." />
+    <title>Choose Your Path — A University Awaits</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        color-scheme: dark;
+        --night: #11151d;
+        --muted: #b6b3ae;
+        --gold: #e6c88d;
+        --serif: "Playfair Display", Georgia, serif;
+        --display: "Cinzel", Georgia, serif;
+        --sans: "DM Sans", Arial, sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+      html { min-height: 100%; }
+      body {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        margin: 0;
+        padding: 38px 22px;
+        overflow-x: hidden;
+        background:
+          radial-gradient(ellipse at 50% 0%, rgba(80, 68, 51, .28), transparent 49%),
+          radial-gradient(circle at 8% 87%, rgba(55, 74, 91, .21), transparent 33%),
+          var(--night);
+        color: #f9f6f0;
+        font-family: var(--sans);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a { color: inherit; }
+      .page { width: min(950px, 100%); margin: auto; }
+      .masthead { display: flex; justify-content: center; margin-bottom: 47px; }
+      .seal {
+        width: 43px;
+        height: 49px;
+        display: grid;
+        place-items: center;
+        border: 1px solid rgba(230, 200, 141, .77);
+        clip-path: polygon(0 0, 100% 0, 100% 72%, 50% 100%, 0 72%);
+        color: var(--gold);
+        font-family: var(--display);
+        font-size: 19px;
+      }
+
+      .intro { max-width: 700px; margin: 0 auto 38px; text-align: center; }
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        margin: 0 0 18px;
+        color: var(--gold);
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: .2em;
+        text-transform: uppercase;
+      }
+      .eyebrow::before, .eyebrow::after { width: 25px; height: 1px; background: rgba(230, 200, 141, .58); content: ""; }
+      h1 {
+        margin: 0;
+        font-family: var(--display);
+        font-size: clamp(35px, 6vw, 61px);
+        font-weight: 500;
+        letter-spacing: .01em;
+        line-height: 1.16;
+      }
+      h1 em { color: var(--gold); font-family: var(--serif); font-weight: 500; }
+      .intro-copy { max-width: 460px; margin: 18px auto 0; color: var(--muted); font-size: 12px; line-height: 1.85; }
+
+      .choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 17px; }
+      .choice {
+        position: relative;
+        min-height: 265px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-end;
+        overflow: hidden;
+        padding: 27px;
+        border: 1px solid rgba(255,255,255,.14);
+        background: #1b222d;
+        text-decoration: none;
+        isolation: isolate;
+        transition: border-color .2s, transform .2s, box-shadow .2s;
+      }
+      .choice::before {
+        position: absolute;
+        z-index: -1;
+        inset: 0;
+        background:
+          radial-gradient(circle at 77% 24%, rgba(220, 189, 128, .18), transparent 22%),
+          linear-gradient(145deg, rgba(28, 38, 48, .25), rgba(11, 16, 23, .95)),
+          repeating-linear-gradient(130deg, transparent 0 32px, rgba(255,255,255,.018) 33px 34px);
+        content: "";
+        transition: transform .45s;
+      }
+      .choice-ordinary { background: #242d32; }
+      .choice-ordinary::before {
+        background:
+          radial-gradient(ellipse at 76% 10%, rgba(144, 168, 146, .2), transparent 36%),
+          linear-gradient(145deg, rgba(36, 55, 53, .2), rgba(12, 19, 23, .95)),
+          repeating-linear-gradient(130deg, transparent 0 32px, rgba(255,255,255,.018) 33px 34px);
+      }
+      .choice:hover { transform: translateY(-4px); border-color: rgba(230, 200, 141, .66); box-shadow: 0 15px 40px rgba(0,0,0,.2); }
+      .choice:hover::before { transform: scale(1.05); }
+      .choice-symbol {
+        position: absolute;
+        top: 21px;
+        right: 24px;
+        color: rgba(230, 200, 141, .78);
+        font-family: var(--serif);
+        font-size: 53px;
+      }
+      .choice-ordinary .choice-symbol { color: rgba(173, 194, 172, .78); }
+      .choice-kicker { margin-bottom: 9px; color: var(--gold); font-size: 8px; font-weight: 700; letter-spacing: .17em; text-transform: uppercase; }
+      .choice-ordinary .choice-kicker { color: #b6c8b7; }
+      .choice h2 { max-width: 360px; margin: 0; font-family: var(--serif); font-size: clamp(26px, 3.5vw, 35px); font-weight: 500; line-height: 1.16; }
+      .choice p { max-width: 340px; margin: 10px 0 20px; color: rgba(245,243,237,.7); font-size: 10px; line-height: 1.75; }
+      .choice-link { display: inline-flex; align-items: center; gap: 10px; min-height: 39px; padding: 0 13px; border: 1px solid rgba(230,200,141,.62); color: #f6e5c4; font-size: 9px; font-weight: 700; letter-spacing: .035em; }
+      .choice-ordinary .choice-link { border-color: rgba(182,200,183,.55); color: #deeadf; }
+      .choice-arrow { font-size: 15px; transition: transform .2s; }
+      .choice:hover .choice-arrow { transform: translateX(4px); }
+
+      .warning { margin: 25px 0 0; color: rgba(230,200,141,.8); font-family: var(--display); font-size: 9px; letter-spacing: .17em; text-align: center; text-transform: uppercase; }
+      .footer { margin-top: 37px; color: rgba(255,255,255,.43); font-size: 9px; letter-spacing: .05em; text-align: center; }
+      a:focus-visible { outline: 2px solid var(--gold); outline-offset: 5px; }
+
+      @media (max-width: 600px) {
+        body { padding: 26px 17px; }
+        .masthead { margin-bottom: 30px; }
+        .intro { margin-bottom: 27px; }
+        .choices { grid-template-columns: 1fr; gap: 12px; }
+        .choice { min-height: 225px; padding: 22px; }
+        .choice-symbol { top: 15px; right: 20px; font-size: 43px; }
+        .warning { margin-top: 19px; font-size: 8px; }
+        .footer { margin-top: 26px; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <div class="masthead" aria-hidden="true"><div class="seal">✦</div></div>
+      <header class="intro">
+        <p class="eyebrow">One question. Two worlds.</p>
+        <h1>Do you believe in magic<br />and want to <em>learn it?</em></h1>
+        <p class="intro-copy">A different kind of university is waiting. Choose the path that feels right for you.</p>
+      </header>
+
+      <nav class="choices" aria-label="Choose your university">
+        <a class="choice choice-magic" href="index.html">
+          <span class="choice-symbol" aria-hidden="true">✧</span>
+          <span class="choice-kicker">The hidden path</span>
+          <h2>Yes. Show me the magic.</h2>
+          <p>Step beyond the ordinary and discover a university devoted to the study of magic.</p>
+          <span class="choice-link">I believe <span class="choice-arrow" aria-hidden="true">→</span></span>
+        </a>
+        <a class="choice choice-ordinary" href="Untitled-1.html">
+          <span class="choice-symbol" aria-hidden="true">✳</span>
+          <span class="choice-kicker">The familiar path</span>
+          <h2>No. Take me to the university.</h2>
+          <p>Explore a traditional university, discover academic programs, and picture what comes next.</p>
+          <span class="choice-link">Show me the way <span class="choice-arrow" aria-hidden="true">→</span></span>
+        </a>
+      </nav>
+
+      <p class="warning">Choose carefully · There’s no going back</p>
+      <footer class="footer">Your next chapter begins with a choice.</footer>
+    </main>
+  </body>
+</html>
